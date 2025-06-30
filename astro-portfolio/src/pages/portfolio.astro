@@ -1,0 +1,67 @@
+---
+import { WORK } from '../lib/constants'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import TopLayout from '../layouts/TopLayout.astro'
+import BottomLayout from '../layouts/BottomLayout.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+
+// Static projects data instead of Contentful
+const projects = [
+  {
+    id: '1',
+    name: 'Portfolio Website',
+    description: 'A modern portfolio built with Astro, Tailwind CSS, and Shadcn UI',
+    website: 'https://github.com/chanisxx/resume',
+    image: '/View1.png',
+    altText: 'Portfolio Project'
+  },
+  {
+    id: '2', 
+    name: 'E-commerce Platform',
+    description: 'Full-stack e-commerce solution with React and Node.js',
+    website: '#',
+    image: '/View2.png',
+    altText: 'E-commerce Project'
+  },
+  {
+    id: '3',
+    name: 'Task Management App',
+    description: 'React-based task management application with drag-and-drop functionality',
+    website: '#',
+    image: '/me.png',
+    altText: 'Task Management Project'
+  }
+]
+---
+
+<BaseLayout
+  title="Portfolio"
+  description="Projects and some clone's that I did"
+>
+  <main class="flex min-h-[80vh] flex-auto flex-col" transition:animate="slide">
+    <TopLayout>
+      <h2
+        class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0"
+      >
+        Projects and clone's
+      </h2>
+    </TopLayout>
+    <BottomLayout size="xl">
+      <div class="flex w-full flex-wrap justify-center gap-2">
+        {
+          projects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              href={project.website}
+              heading={project.name}
+              subheading={project.description}
+              imagePath={project.image}
+              altText={project.altText}
+              class="w-full sm:w-2/5"
+            />
+          ))
+        }
+      </div>
+    </BottomLayout>
+  </main>
+</BaseLayout>
